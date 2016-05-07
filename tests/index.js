@@ -3,8 +3,8 @@ import convertStateToHTML from '../src/index.js'
 import test from 'tape'
 
 const testCases = [{
-  description: "Inline styles",
-  html: `<p><span style="color:red;">red</span>notred</p>`,
+  description: "Unstyled wrapper",
+  html: `<span><span style="color:red;">red</span>notred</span>`,
   state: {
     "entityMap":{},
     "blocks":[{
@@ -20,11 +20,54 @@ const testCases = [{
       "entityRanges":[]
     }]
   }
+}, {
+  description: "Heading with inline styles",
+  html: `<h1><span style="color:red;">Red</span> Heading</h1>`,
+  state: {
+    "entityMap":{},
+    "blocks":[{
+      "key":"9nc73",
+      "text":"Red Heading",
+      "type":"header-one",
+      "depth":0,
+      "inlineStyleRanges":[{
+        "offset":0,
+        "length":3,
+        "style":"RED"
+      }],
+      "entityRanges":[]
+    }]
+  }
+}, {
+  description: "Multiple inline styles",
+  html: `<p><span style="color:red;font-style:italic;">reditalic</span></p>`,
+  state: {
+    "entityMap":{},
+    "blocks":[{
+      "key":"9nc73",
+      "text":"reditalic",
+      "type":"p",
+      "depth":0,
+      "inlineStyleRanges":[{
+        "offset":0,
+        "length":9,
+        "style":"RED"
+      }, {
+        "offset":0,
+        "length":9,
+        "style":"ITALIC"
+      }],
+      "entityRanges":[]
+    }]
+  }
 }]
 
 const styleMap = {
   RED: {
     color: 'red'
+  },
+  ITALIC: {
+    fontStyle: 'italic'
   }
 }
 

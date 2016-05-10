@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack -w",
-    "test": "tape -r babel-register tests/**/*.js"
+    "test": "tape -r babel-register tests/**/*.test.js"
   },
   "author": "Jack Callister",
   "license": "ISC",

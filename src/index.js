@@ -9,9 +9,10 @@ const blockElementMap = {
 }
 
 class HTMLGenerator {
-  constructor(contentState, styleMap) {
+  constructor(contentState, { inlineStyleMap, blockStyleFn }) {
     this.contentState = contentState
-    this.styleMap = styleMap
+    this.inlineStyleMap = inlineStyleMap
+    this.blockStyleFn = blockStyleFn
   }
 
   call() {
@@ -27,7 +28,8 @@ class HTMLGenerator {
     const entityRanges = getEntityRanges(text, characterMetadataList)
 
     const content   = this.applyInlineStyles(entityRanges)
-    const blockHTML = this.applyBlockElementWrapper(type, content)
+    const attrs     = this.blockStyleFn(block)
+    const blockHTML = this.applyBlockElementWrapper(type, content, attrs)
 
     return blockHTML
   }
@@ -54,18 +56,18 @@ class HTMLGenerator {
     Object.keys(style.toObject()).forEach((k) => {
       styles = {
         ...styles,
-        ...this.styleMap[k],
+        ...this.inlineStyleMap[k],
       }
     })
 
     return styles
   }
 
-  applyBlockElementWrapper(type, content) {
-    return blockElementMap[type]({content})
+  applyBlockElementWrapper(type, content, attrs) {
+    return blockElementMap[type]({ content, attrs })
   }
 }
 
-export default function(contentState, styleMap) {
-  return new HTMLGenerator(contentState, styleMap).call()
+export default function(contentState, options) {
+  return new HTMLGenerator(contentState, options).call()
 }

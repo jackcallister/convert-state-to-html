@@ -4,9 +4,7 @@ Given a `ContentState` object from a Draft JS editor, output an HTML string.
 
 ### convertStateToHTML(contentState, { inlineStyleMap, blockStyleFn })
 
-Content State is a typical content state object. Options must contain two keys, inlineStyleMap and blockStyleFn. Here's a usage example.
-
-Given a contentState object that looks like this:
+Options must contain `inlineStyleMap` and `blockAttrFn`. Here's an example:
 
 ```
 const raw = {
@@ -31,7 +29,7 @@ const inlineStyleMap = {
   }
 }
 
-function blockStyleFn(contentBlock) {
+function blockAttrFn(contentBlock) {
   switch(contentBlock.getType()) {
     case 'header-one':
       return {
@@ -46,7 +44,7 @@ function blockStyleFn(contentBlock) {
 }
 
 const contentState = convertFromRaw(raw)
-const options = { inlineStyleMap, blockStyleFn }
+const options = { inlineStyleMap, blockAttrFn }
 const stateToHTML = convertStateToHTML(contentState, options)
 
 ```

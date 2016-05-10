@@ -12,7 +12,7 @@ const inlineStyleMap = {
   }
 }
 
-function blockStyleFn(contentBlock) {
+function blockAttrFn(contentBlock) {
   switch(contentBlock.getType()) {
     case 'header-one':
       return {
@@ -41,7 +41,7 @@ test('convertStateToHTML', (t) => {
     } = scenario
 
     const contentState = convertFromRaw(state)
-    const options = { inlineStyleMap, blockStyleFn }
+    const options = { inlineStyleMap, blockAttrFn }
     const stateToHTML = convertStateToHTML(contentState, options)
 
     t.equal(stateToHTML, html)

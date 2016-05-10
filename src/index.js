@@ -9,10 +9,10 @@ const blockElementMap = {
 }
 
 class HTMLGenerator {
-  constructor(contentState, { inlineStyleMap, blockStyleFn }) {
+  constructor(contentState, { inlineStyleMap, blockAttrFn }) {
     this.contentState = contentState
     this.inlineStyleMap = inlineStyleMap
-    this.blockStyleFn = blockStyleFn
+    this.blockAttrFn = blockAttrFn
   }
 
   call() {
@@ -28,7 +28,7 @@ class HTMLGenerator {
     const entityRanges = getEntityRanges(text, characterMetadataList)
 
     const content   = this.applyInlineStyles(entityRanges)
-    const attrs     = this.blockStyleFn(block)
+    const attrs     = this.blockAttrFn(block)
     const blockHTML = this.applyBlockElementWrapper(type, content, attrs)
 
     return blockHTML

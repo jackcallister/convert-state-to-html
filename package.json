@@ -9,13 +9,17 @@
   },
   "author": "Jack Callister",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "draft-js": "^0.7.0",
     "draft-js-utils": "^0.1.4"
   },
   "devDependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "draft-js": "^0.7.0",
+    "draft-js-utils": "^0.1.4",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",

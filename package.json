@@ -1,6 +1,6 @@
 {
   "name": "convert-state-to-html",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -9,12 +9,6 @@
   },
   "author": "Jack Callister",
   "license": "ISC",
-  "peerDependencies": {
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "draft-js": "^0.7.0",
-    "draft-js-utils": "^0.1.4"
-  },
   "devDependencies": {
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

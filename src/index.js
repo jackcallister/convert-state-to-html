@@ -1,6 +1,6 @@
 import { Entity } from 'draft-js'
 import { getEntityRanges } from 'draft-js-utils'
-import { h1, p, span } from './elements/index.js'
+import { h1, p, span, a } from './elements/index.js'
 
 const blockElementMap = {
   'header-one': h1,
@@ -24,6 +24,7 @@ class HTMLGenerator {
   parseBlock(block) {
     const type = block.getType()
     const text = block.getText()
+
     const characterMetadataList = block.getCharacterList()
     const entityRanges = getEntityRanges(text, characterMetadataList)
 
@@ -36,14 +37,24 @@ class HTMLGenerator {
 
   applyInlineStyles(entityRanges) {
     return entityRanges.map(([entityKey, styles]) => {
+      const entity = entityKey ? Entity.get(entityKey) : null
+      const entityType = entity ? entity.getType() : null
       return styles.map(([text, style]) => {
+        let content;
+
         if (Object.keys(style.toObject()).length > 0) {
-          return this.elementWithStyle(text, style)
+          content = this.elementWithStyle(text, style)
         } else {
-          return text
+          content = text
         }
+
+        return entity ? this.applyEntity(content, entity) : content
       }).join('')
     }).join('')
+  }
+
+  applyEntity(content, entity) {
+    return a({attrs: { href: entity.data.url }, content: content})
   }
 
   elementWithStyle(text, style) {

@@ -40,25 +40,28 @@ class HTMLGenerator {
       const entity = entityKey ? Entity.get(entityKey) : null
       const entityType = entity ? entity.getType() : null
       return styles.map(([text, style]) => {
-        let content;
+        const styledElement = this.elementWithStyle(text, style)
+        const element = this.applyEntity(styledElement, entity)
 
-        if (Object.keys(style.toObject()).length > 0) {
-          content = this.elementWithStyle(text, style)
-        } else {
-          content = text
-        }
-
-        return entity ? this.applyEntity(content, entity) : content
+        return element
       }).join('')
     }).join('')
   }
 
-  applyEntity(content, entity) {
-    return a({attrs: { href: entity.data.url }, content: content})
+  applyEntity(element, entity) {
+    if (entity) {
+      return a({attrs: { href: entity.data.url }, content: element })
+    } else {
+      return element
+    }
   }
 
   elementWithStyle(text, style) {
-    return span({ style: this.getInlineStyles(style), content: text })
+    if (Object.keys(style.toObject()).length > 0) {
+      return span({ style: this.getInlineStyles(style), content: text })
+    } else {
+      return text
+    }
   }
 
   getInlineStyles(style) {

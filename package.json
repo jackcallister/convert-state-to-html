@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack -w",
+    "prepublish": "webpack",
     "test": "tape -r babel-register tests/**/*.test.js"
   },
   "author": "Jack Callister",

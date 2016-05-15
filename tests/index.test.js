@@ -1,5 +1,5 @@
 import { convertFromRaw, ContentState } from 'draft-js'
-import convertStateToHTML from '../lib/index.js'
+import convertStateToHTML from '../src/index.js'
 import test from 'tape'
 import scenarios from './scenarios'
 

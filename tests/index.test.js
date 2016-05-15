@@ -1,4 +1,4 @@
-import { convertFromRaw } from 'draft-js'
+import { convertFromRaw, ContentState } from 'draft-js'
 import convertStateToHTML from '../lib/index.js'
 import test from 'tape'
 import scenarios from './scenarios'
@@ -40,7 +40,8 @@ test('convertStateToHTML', (t) => {
       html
     } = scenario
 
-    const contentState = convertFromRaw(state)
+    const contentBlockArray = convertFromRaw(state)
+    const contentState = ContentState.createFromBlockArray(contentBlockArray)
     const options = { inlineStyleMap, blockAttrFn }
     const stateToHTML = convertStateToHTML(contentState, options)
 

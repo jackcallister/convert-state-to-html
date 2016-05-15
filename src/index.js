@@ -5,7 +5,7 @@ import { h1, p, span, a } from './elements/index.js'
 const blockElementMap = {
   'header-one': h1,
   'p': p,
-  'unstyled': span,
+  'unstyled': p,
 }
 
 class HTMLGenerator {

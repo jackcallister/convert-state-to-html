@@ -1,6 +1,6 @@
 const scenarios = [{
   description: "Unstyled wrapper",
-  html: `<span><span style="color:red;">red</span>notred</span>`,
+  html: `<p><span style="color:red;">red</span>notred</p>`,
   state: {
     "entityMap":{},
     "blocks":[{
